@@ -1,4 +1,5 @@
 'use client';
+import WaitlistForm from '../../app/components/WaitlistForm'
 export default function FinHelixLanding() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
@@ -46,22 +47,9 @@ export default function FinHelixLanding() {
                 FinHelix connects banking, cards, loans, insurance, HSA, brokerage, and even beginner‑friendly options strategies into one secure, beautiful app.
               </p>
               {/* Waitlist form (stub) */}
-              <form
-                id="waitlist"
-                className="mt-8 flex w-full max-w-lg rounded-2xl border border-white/10 bg-white/5 p-2 backdrop-blur"
-                onSubmit={(e) => { e.preventDefault(); const email = (e.currentTarget.elements.namedItem('email') as HTMLInputElement)?.value; alert(`Thanks! We'll be in touch at ${email}`); }}
-              >
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="you@finhelix.app"
-                  className="w-full rounded-xl bg-transparent px-4 py-3 text-slate-100 placeholder:text-slate-400 focus:outline-none"
-                />
-                <button className="shrink-0 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-500 to-emerald-500 px-5 py-3 font-medium shadow-lg hover:opacity-90">
-                  Join
-                </button>
-              </form>
+              <div id="waitlist">
+                <WaitlistForm />
+              </div>
               <p className="mt-3 text-sm text-slate-400">Private beta • No spam • Cancel anytime</p>
             </div>
             <div className="relative">
