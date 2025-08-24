@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "FinHelix",
-  description: "Your net worth, unified.",
+  description: "Your net worth, unified ",
 };
 
 export default function RootLayout({
