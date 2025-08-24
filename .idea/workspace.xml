@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4305082c-efa2-44e9-88df-c90e4cae36c8" name="Changes" comment="first draft">
-      <change afterPath="$PROJECT_DIR$/.next/trace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.next/types/routes.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.next/types/validator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/waitlist/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/WaitlistForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/trace" beforeDir="false" afterPath="$PROJECT_DIR$/.next/trace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/types/routes.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/.next/types/routes.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/types/validator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/.next/types/validator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/FinHelixLanding.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/FinHelixLanding.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,36 +22,42 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "pradeepkryadav"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;pradeepkryadav&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/pradeepkryadav/finhelix-web.git",
-    "accountId": "7b936545-35c7-4421-8ae1-a31a45dd7f69"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/pradeepkryadav/finhelix-web.git&quot;,
+    &quot;accountId&quot;: &quot;7b936545-35c7-4421-8ae1-a31a45dd7f69&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="31hQmeQyBfVR1KQn497I66GnGly" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/I320253/Desktop/Personal/projects/finhelix-web"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/I320253/Desktop/Personal/projects/finhelix-web/src/app/components&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/components" />
+      <recent name="$PROJECT_DIR$/src/app" />
+    </key>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4305082c-efa2-44e9-88df-c90e4cae36c8" name="Changes" comment="" />
@@ -128,7 +138,23 @@
       <option name="project" value="LOCAL" />
       <updated>1755996933506</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="first draft">
+      <option name="closed" value="true" />
+      <created>1755997834248</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1755997834248</updated>
+    </task>
+    <task id="LOCAL-00011" summary="first draft">
+      <option name="closed" value="true" />
+      <created>1755998046175</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1755998046175</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
