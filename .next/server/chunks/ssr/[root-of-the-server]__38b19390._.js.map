@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///Users/I320253/Desktop/Personal/projects/finhelix-web/src/app/page.tsx"],"sourcesContent":["import FinHelixLanding from '../../app/components/FinHelixLanding'; // adjust path if you use /src\n\n\nexport default function Page() {\n  return <FinHelixLanding />;\n}"],"names":[],"mappings":";;;;;;;;;;;;AAGe,SAAS;IACtB,qBAAO,8OAAC;;;;;AACV","debugId":null}}]
+}

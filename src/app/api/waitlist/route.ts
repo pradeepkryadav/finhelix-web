@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
+import { kv } from '@vercel/kv'
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     // Prefer Vercel KV if env present
     const hasKV = !!process.env.KV_REST_API_URL && !!process.env.KV_REST_API_TOKEN
     if (hasKV) {
-      const { kv } = await import('@vercel/kv')
+      //const { kv } = await import('@vercel/kv')
       await kv.sadd('waitlist:emails', email.toLowerCase())
       await kv.hset(`waitlist:email:${email.toLowerCase()}`, {
         email: email.toLowerCase(),
