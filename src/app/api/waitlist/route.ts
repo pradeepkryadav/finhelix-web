@@ -28,8 +28,9 @@ export async function POST(req: NextRequest) {
     const path = process.env.LOCAL_WAITLIST_PATH || '/tmp/waitlist.csv'
     await fs.appendFile(path, line, 'utf8')
     return NextResponse.json({ ok: true, stored: 'file', path })
-  } catch (e: any) {
-    console.error(e)
-    return NextResponse.json({ ok: false, error: e?.message || 'error' }, { status: 500 })
-  }
+ } catch (e: unknown) {
+   console.error(e)
+   const message = e instanceof Error ? e.message : 'error'
+   return NextResponse.json({ ok: false, error: message }, { status: 500 })
+ }
 }
