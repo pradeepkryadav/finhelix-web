@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import WaitlistForm from '../../app/components/WaitlistForm'
 export default function FinHelixLanding() {
   return (
@@ -22,6 +23,7 @@ export default function FinHelixLanding() {
               <a href="#security" className="hover:text-white">Security</a>
               <a href="#pricing" className="hover:text-white">Pricing</a>
               <a href="#faq" className="hover:text-white">FAQ</a>
+              <Link href="/sentiment" className="hover:text-white text-sky-400 font-medium">Market Sentiment</Link>
             </nav>
             <div className="flex items-center gap-3">
               <a href="#waitlist" className="hidden sm:inline-flex rounded-xl px-4 py-2 bg-white/10 hover:bg-white/20 transition">Sign in</a>
