@@ -12,7 +12,8 @@
     "@vercel/kv": "^3.0.0",
     "next": "15.3.3",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "styled-jsx": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
