@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=2d`
     const res = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0' },
-      next: { revalidate: 60 }, // cache 60s
+      next: { revalidate: 0 }, // always fetch fresh
     })
     if (!res.ok) return NextResponse.json({ error: `Yahoo returned ${res.status}` }, { status: 502 })
 

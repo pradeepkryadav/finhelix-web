@@ -24,7 +24,7 @@ const INDIA_SECTORS = [
 async function fetchYahoo(ticker: string) {
   const res = await fetch(
     `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&range=2d`,
-    { headers: { 'User-Agent': 'Mozilla/5.0' }, next: { revalidate: 120 } }
+    { headers: { 'User-Agent': 'Mozilla/5.0' }, next: { revalidate: 0 } }
   )
   if (!res.ok) throw new Error(`${res.status}`)
   const d = await res.json()
@@ -54,7 +54,7 @@ export async function GET() {
   try {
     const nseRes = await fetch('https://www.nseindia.com/api/allIndices', {
       headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json', 'Referer': 'https://www.nseindia.com/' },
-      next: { revalidate: 120 },
+      next: { revalidate: 0 },
     })
     if (nseRes.ok) {
       const nseData = await nseRes.json()

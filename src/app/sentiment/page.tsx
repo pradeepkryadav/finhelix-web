@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 // ── types ──────────────────────────────────────────────────────────────────
 interface IndexQuote {
@@ -191,10 +191,13 @@ export default function SentimentPage() {
   const [sectorsLoading, setSectorsLoading] = useState(true);
   const [stocksLoading, setStocksLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<string>('');
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
+  const fetchAll = useCallback(() => {
+    setRefreshing(true);
+
     // Fear & Greed
-    fetch('https://api.alternative.me/fng/?limit=1')
+    fetch('https://api.alternative.me/fng/?limit=1', { cache: 'no-store' })
       .then(r => r.json())
       .then(d => {
         const score = parseInt(d.data[0].value, 10);
@@ -202,29 +205,26 @@ export default function SentimentPage() {
       })
       .catch(() => setFg({ score: null, label: 'Unavailable', loading: false }));
 
-    // FII / DII from NSE (via our proxy)
-    fetch('/api/nse-fii')
+    // FII / DII
+    fetch('/api/nse-fii', { cache: 'no-store' })
       .then(r => r.json())
       .then(d => setFiiDii({ ...d, loading: false }))
       .catch(() => setFiiDii({ date: null, fii: null, dii: null, loading: false }));
 
     // India VIX + NSE index prices
-    fetch('/api/nse-indices')
+    fetch('/api/nse-indices', { cache: 'no-store' })
       .then(r => r.json())
       .then(d => {
         const vixEntry = d.indices?.find((i: NseIndex) => i.name === 'INDIA VIX');
         if (vixEntry) setVix(vixEntry.last);
-
-        // Patch Nifty / Bank Nifty / IT from NSE (more accurate than Yahoo for INR)
         const nseMap: Record<string, NseIndex> = {};
         (d.indices ?? []).forEach((i: NseIndex) => { nseMap[i.name] = i; });
-
         setQuotes(prev => prev.map(q => {
           if (q.region !== 'india') return q;
           const match =
-            q.displayTicker === 'NIFTY'      ? nseMap['NIFTY 50']   :
-            q.displayTicker === 'BANKNIFTY'  ? nseMap['NIFTY BANK'] :
-            q.displayTicker === 'NIFTYIT'    ? nseMap['NIFTY IT']   :
+            q.displayTicker === 'NIFTY'     ? nseMap['NIFTY 50']   :
+            q.displayTicker === 'BANKNIFTY' ? nseMap['NIFTY BANK'] :
+            q.displayTicker === 'NIFTYIT'   ? nseMap['NIFTY IT']   :
             null;
           if (!match) return q;
           return { ...q, price: match.last, change: match.change, loading: false, error: false };
@@ -234,7 +234,7 @@ export default function SentimentPage() {
 
     // US + Sensex from Yahoo
     INDEX_CONFIG.forEach((cfg, i) => {
-      if (['NIFTY', 'BANKNIFTY', 'NIFTYIT'].includes(cfg.displayTicker)) return; // covered by NSE
+      if (['NIFTY', 'BANKNIFTY', 'NIFTYIT'].includes(cfg.displayTicker)) return;
       fetchQuote(cfg.ticker)
         .then(({ price, change }) => {
           setQuotes(prev => prev.map((q, idx) =>
@@ -248,22 +248,24 @@ export default function SentimentPage() {
         });
     });
 
-    setLastUpdated(new Date().toLocaleTimeString());
-
     // Sectors
-    fetch('/api/sectors')
+    fetch('/api/sectors', { cache: 'no-store' })
       .then(r => r.json())
       .then(d => { setUsSectors(d.usSectors ?? []); setIndiaSectors(d.indiaSectors ?? []); })
       .catch(() => {})
       .finally(() => setSectorsLoading(false));
 
     // Top stocks
-    fetch('/api/top-stocks')
+    fetch('/api/top-stocks', { cache: 'no-store' })
       .then(r => r.json())
       .then(d => { setUsStocks(d.usStocks ?? []); setIndiaStocks(d.indiaStocks ?? []); })
       .catch(() => {})
-      .finally(() => setStocksLoading(false));
+      .finally(() => { setStocksLoading(false); setRefreshing(false); });
+
+    setLastUpdated(new Date().toLocaleTimeString());
   }, []);
+
+  useEffect(() => { fetchAll(); }, [fetchAll]);
 
   const usQuotes    = quotes.filter(q => q.region === 'us');
   const indiaQuotes = quotes.filter(q => q.region === 'india');
@@ -310,14 +312,24 @@ export default function SentimentPage() {
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-12">
         {/* Title */}
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold">Market Sentiment Analysis</h1>
-            <p className="mt-2 text-slate-400">Live prices fetched directly in your browser — no server involved.</p>
+            <p className="mt-2 text-slate-400">Live data fetched on every page load from NSE, Yahoo Finance &amp; Alternative.me.</p>
           </div>
-          {lastUpdated && (
-            <p className="text-xs text-slate-500 shrink-0">Updated {lastUpdated}</p>
-          )}
+          <div className="flex items-center gap-3 shrink-0">
+            {lastUpdated && <p className="text-xs text-slate-500">Updated {lastUpdated}</p>}
+            <button
+              onClick={fetchAll}
+              disabled={refreshing}
+              className="flex items-center gap-1.5 rounded-xl px-3 py-2 bg-white/10 hover:bg-white/20 transition text-sm disabled:opacity-50"
+            >
+              <svg viewBox="0 0 24 24" className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Refresh
+            </button>
+          </div>
         </div>
 
         {/* ── Overall gauge ── */}

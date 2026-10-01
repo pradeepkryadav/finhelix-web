@@ -12,7 +12,7 @@ export async function GET() {
         'Accept': 'application/json',
         'Referer': 'https://www.nseindia.com/',
       },
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
     })
     if (!res.ok) return NextResponse.json({ error: `NSE returned ${res.status}` }, { status: 502 })
     const data = await res.json()
